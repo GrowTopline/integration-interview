@@ -1,20 +1,8 @@
 import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
-import connect, { sql } from '@databases/sqlite';
 import OAuthClient from 'intuit-oauth';
-
-// Creates an in-memory SQLite DB. Note that this DB does not write to disk.
-const db = connect();
-
-async function dbInit() {
-  await db.query(sql`
-    CREATE TABLE IF NOT EXISTS todo (
-      todo_id INTEGER PRIMARY KEY,
-      label VARCHAR NOT NULL,
-      done BOOLEAN NOT NULL DEFAULT FALSE
-    );
-  `);
-}
+import { intuitOauthClient } from './intuit';
+import { dbInit } from './db';
 
 const app: Express = express();
 
@@ -25,12 +13,7 @@ app.use(express.static('public')); // Serves files in the /static directory
 
 // Route to get an Intuit OAuth URI
 app.get('/intuit-oauth-uri', async (_: Request, res: Response) => {
-  const uri = new OAuthClient({
-    clientId: process.env.INTUIT_CLIENT_ID,
-    clientSecret: process.env.INTUIT_CLIENT_SECRET,
-    environment: process.env.INTUIT_ENVIRONMENT,
-    redirectUri: process.env.INTUIT_REDIRECT_URI,
-  }).authorizeUri({
+  const uri = intuitOauthClient.authorizeUri({
     scope: [OAuthClient.scopes.Accounting],
   });
 

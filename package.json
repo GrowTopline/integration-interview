@@ -13,8 +13,8 @@
     "typescript": "^4.9.4"
   },
   "scripts": {
-    "start": "esrun main.ts",
-    "dev": "esrun --watch main.ts"
+    "start": "esrun src/main.ts",
+    "dev": "esrun --watch src/main.ts"
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
