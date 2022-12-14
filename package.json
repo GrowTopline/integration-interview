@@ -7,13 +7,13 @@
     "@digitak/esrun": "^3.2.15",
     "@types/cors": "^2.8.13",
     "@types/node": "^18.11.15",
-    "@types/pg": "^8.6.5",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "typescript": "^4.9.4"
   },
   "scripts": {
-    "server": "esrun main.ts"
+    "start": "esrun main.ts",
+    "dev": "esrun --watch main.ts"
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
