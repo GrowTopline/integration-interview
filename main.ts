@@ -34,29 +34,18 @@ app.get('/intuit-oauth-uri', async (_: Request, res: Response) => {
     scope: [OAuthClient.scopes.Accounting],
   });
 
-  res.send(uri);
+  res.redirect(uri);
+});
+
+// Route to get an Intuit OAuth URI
+app.get('/integration-callback', async (_: Request, res: Response) => {
+  console.log('Getting a token');
+  res.redirect('/index.html');
 });
 
 // Route to get all todos
-app.get('/todo', async (_: Request, res: Response) => {
-  const result = await db.query(sql`SELECT * from todo`);
-  res.send(result);
-});
-
-// Route to create a todo
-app.post('/todo', async (req: Request, res: Response) => {
-  const result = await db.query(
-    sql`INSERT INTO todo (label) VALUES (${req.body.label}) RETURNING *`
-  );
-  res.send(result);
-});
-
-// Route to toggle the 'done' state of a todo
-app.put('/todo/:todo_id', async (req: Request, res: Response) => {
-  const result = await db.query(
-    sql`UPDATE todo SET done = NOT done WHERE todo_id = ${req.params.todo_id} RETURNING *`
-  );
-  res.send(result);
+app.get('/', async (_: Request, res: Response) => {
+  res.redirect('/index.html');
 });
 
 app.listen(8080, async () => {
