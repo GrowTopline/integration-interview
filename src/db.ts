@@ -6,10 +6,8 @@ export const db = connect();
 // Method to initialize the DB when the app starts
 export async function dbInit() {
   await db.query(sql`
-    CREATE TABLE IF NOT EXISTS todo (
-      todo_id INTEGER PRIMARY KEY,
-      label VARCHAR NOT NULL,
-      done BOOLEAN NOT NULL DEFAULT FALSE
+    CREATE TABLE IF NOT EXISTS oauth_states (
+      state VARCHAR NOT NULL
     );
   `);
 }
