@@ -9,8 +9,16 @@
       }
 
       section {
-        margin-bottom: 1rem;
+        padding: 1rem;
         border-bottom: 1px solid grey;
+      }
+
+      #companyInfo {
+        background-color: beige;
+        border: 2px solid grey;
+        border-radius: 8px;
+        padding: 1rem;
+        display: block;
       }
     </style>
   </head>
@@ -23,21 +31,42 @@
     </section>
     <section>
       <h2>Part 2</h2>
-      <h4>Refreshing the tokens</h4>
+      <h4>Storing and Refreshing the tokens</h4>
+      <button onclick="refreshTokens()">Refresh Tokens</button>
     </section>
     <section>
       <h2>Part 3</h2>
       <h4>Using the tokens</h4>
+      <button onclick="getCompanyInfo()">Get Company Info</button>
+      <pre><code id="companyInfo">Company info will go here</code></pre>
     </section>
 
     <script>
-      async function connectToIntuit() {
+      async function refreshTokens() {
         try {
           // Code to get the auth URI goes here
-          const resp = await fetch('/intuit-oauth-uri');
-          console.log('resp', await resp.text());
+          const resp = await fetch('/refresh-tokens');
+          if (resp.ok) {
+            alert('Successfully refreshed tokens');
+          } else {
+            throw new Error(await resp.text());
+          }
         } catch (e) {
-          console.error(e);
+          alert(e);
+        }
+      }
+
+      async function getCompanyInfo() {
+        try {
+          // Code to get the auth URI goes here
+          const resp = await fetch('/company-info');
+          if (resp.ok) {
+            companyInfo.innerText = await JSON.stringify(resp.json(), null, 2);
+          } else {
+            throw new Error(await resp.text());
+          }
+        } catch (e) {
+          alert(e);
         }
       }
     </script>

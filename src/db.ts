@@ -9,5 +9,7 @@ export async function dbInit() {
     CREATE TABLE IF NOT EXISTS oauth_states (
       state VARCHAR NOT NULL
     );
+
+    -- Add SQL code here in Part 2 to store the tokens
   `);
 }

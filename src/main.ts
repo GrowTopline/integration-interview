@@ -8,7 +8,6 @@ import { sql } from '@databases/sqlite';
 const app: Express = express();
 
 // Set up middlewear
-app.use(cors()); // Allows queries to come from url's not served by this app
 app.use(express.json()); // Automatically parses requests with content-type: application/json
 app.use(express.static('public')); // Serves files in the /static directory
 
@@ -52,12 +51,26 @@ app.get('/integration-callback', async (req: Request, res: Response) => {
   res.redirect('/success.html');
 });
 
-// Route to get all todos
-app.get('/', async (_: Request, res: Response) => {
+// Route to refresh the tokens (part 2)
+app.get('/refresh-tokens', async (req: Request, res: Response) => {
+  // Add code here in Part 2 to refresh the tokens
+  res.status(501).send('Not implemented');
+});
+
+// Route to get company info (part 3)
+app.get('/company-info', async (req: Request, res: Response) => {
+  // Add code here in Part 3 to get company info
+  res.status(501).send('Not implemented');
+});
+
+// Route to redirect all undefined routes to index.html
+app.get('*', (_: Request, res: Response) => {
   res.redirect('/index.html');
 });
 
+// Spin up the server
 app.listen(8080, async () => {
+  // Initialize the db
   await dbInit();
   console.log('Server is running at http://localhost:8080');
 });
