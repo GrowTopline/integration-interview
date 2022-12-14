@@ -8,6 +8,8 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types": ["intuit-oauth"],
+    "typeRoots": ["./types", "./node_modules/@types"]
   }
 }

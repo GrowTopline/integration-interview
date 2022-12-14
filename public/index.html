@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Integration Interview</title>
+    <style>
+      * {
+        font-family: monospace;
+      }
+
+      section {
+        margin-bottom: 1rem;
+        border-bottom: 1px solid grey;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Topline Integration Interview</h1>
+    <section>
+      <h2>Part 1</h2>
+      <h4>Connecting to Intuit</h4>
+      <button onclick="connectToIntuit()">Connect to Intuit</button>
+    </section>
+    <section>
+      <h2>Part 2</h2>
+      <h4>Refreshing the tokens</h4>
+    </section>
+    <section>
+      <h2>Part 3</h2>
+      <h4>Using the tokens</h4>
+    </section>
+
+    <script>
+      async function connectToIntuit() {
+        try {
+          // Code to get the auth URI goes here
+          const resp = await fetch('/intuit-oauth-uri');
+          console.log('resp', await resp.text());
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    </script>
+  </body>
+</html>

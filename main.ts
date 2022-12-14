@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import connect, { sql } from '@databases/sqlite';
+import OAuthClient from 'intuit-oauth';
 
 // Creates an in-memory SQLite DB. Note that this DB does not write to disk.
 const db = connect();
@@ -18,8 +19,23 @@ async function dbInit() {
 const app: Express = express();
 
 // Set up middlewear
-app.use(cors());
-app.use(express.json());
+app.use(cors()); // Allows queries to come from url's not served by this app
+app.use(express.json()); // Automatically parses requests with content-type: application/json
+app.use(express.static('public')); // Serves files in the /static directory
+
+// Route to get an Intuit OAuth URI
+app.get('/intuit-oauth-uri', async (_: Request, res: Response) => {
+  const uri = new OAuthClient({
+    clientId: process.env.INTUIT_CLIENT_ID,
+    clientSecret: process.env.INTUIT_CLIENT_SECRET,
+    environment: process.env.INTUIT_ENVIRONMENT,
+    redirectUri: process.env.INTUIT_REDIRECT_URI,
+  }).authorizeUri({
+    scope: [OAuthClient.scopes.Accounting],
+  });
+
+  res.send(uri);
+});
 
 // Route to get all todos
 app.get('/todo', async (_: Request, res: Response) => {
