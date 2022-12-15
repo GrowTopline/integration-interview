@@ -7,9 +7,8 @@ import { sql } from '@databases/sqlite';
 
 const app: Express = express();
 
-// Set up middlewear
-app.use(express.json()); // Automatically parses requests with content-type: application/json
-app.use(express.static('public')); // Serves files in the /static directory
+// Set up middlewear to serve html files from the `public` directory
+app.use(express.static('public'));
 
 // Route to initialize intuit oauth flow
 app.get('/intuit-oauth-uri', async (_: Request, res: Response) => {

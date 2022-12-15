@@ -1,4 +1,4 @@
-/* eslint-disable max-classes-per-file */
+// Type declaration file for intuit-oauth because it is not provided by the npm package
 declare module 'intuit-oauth' {
   import csrf from 'csrf';
 
