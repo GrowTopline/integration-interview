@@ -1,7 +1,7 @@
 {
   "name": "todo-interview",
   "version": "0.1.0",
-  "private": true,
+  "license": "MIT",
   "dependencies": {
     "@databases/sqlite": "^4.0.2",
     "@digitak/esrun": "^3.2.15",

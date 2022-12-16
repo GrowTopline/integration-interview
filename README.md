@@ -25,7 +25,7 @@ Make a fork of this repo on your own GitHub account and then clone it down to yo
 
 - Read through the files in the `/src` directory.
 - Install dependencies for the project with `yarn install`.
-- Start the backend server with `yarn start` or `yarn dev` depending on whether you want the server to run in "watch mode".
+- Start the backend server with `yarn start` or `yarn dev` depending on whether you want the server to run in [watch mode](https://github.com/digital-loukoum/esrun#watch-mode), but note that it won't restart your server if it crashes.
 - Navigate to [http://localhost:8080](http://localhost:8080) in your browser
 
 If you have trouble, please don't hesitate to reach out to elliot@growtopline.com.
