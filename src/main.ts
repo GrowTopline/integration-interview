@@ -1,5 +1,4 @@
 import express, { Express, Request, Response } from 'express';
-import cors from 'cors';
 import OAuthClient from 'intuit-oauth';
 import { intuitOauthClient } from './intuit';
 import { db, dbInit } from './db';
